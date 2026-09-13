@@ -88,14 +88,14 @@ noncomputable def fourierPartialSum
   ∑ k ∈ fourierIndices n,
     fourierCoeff f k * fourier k x
 
-theorem fourierPartialSum_fourier_of_mem
+private theorem fourierPartialSum_fourier_of_mem
     (n : ℕ) (m : ℤ)
     (hm : m ∈ fourierIndices n) :
     fourierPartialSum (T := T) ⇑(fourier m) n = ⇑(fourier m) := by
   funext x
   simp [fourierPartialSum, fourierCoeff_fourier, Pi.single_apply, hm]
 
-theorem fourierPartialSum_fourier_of_not_mem
+private theorem fourierPartialSum_fourier_of_not_mem
     (n : ℕ) (m : ℤ)
     (hm : m ∉ fourierIndices n) :
     fourierPartialSum (T := T) ⇑(fourier m) n = 0 := by
@@ -120,7 +120,7 @@ noncomputable def fejerMean
     ∑ j ∈ Finset.range (n + 1),
       fourierPartialSum (T := T) f j x
 
-theorem fejerMean_fourier
+private theorem fejerMean_fourier
     (n : ℕ) (m : ℤ) :
     fejerMean (T := T) ⇑(fourier m) n =
       fun x =>
@@ -138,7 +138,7 @@ theorem fejerMean_fourier
   · simp [h]
   · simp [h]
 
-lemma card_filter_natAbs_le
+private lemma card_filter_natAbs_le
     (n : ℕ) (m : ℤ) :
     ((Finset.range (n + 1)).filter (fun j => m.natAbs ≤ j)).card =
       n + 1 - m.natAbs := by
@@ -151,7 +151,7 @@ lemma card_filter_natAbs_le
   rw [hfilter]
   simp
 
-lemma sum_indicator
+private lemma sum_indicator
     (n : ℕ) (m : ℤ) (c : ℂ) :
     (∑ j ∈ Finset.range (n + 1),
         if m ∈ fourierIndices j then c else 0) =
