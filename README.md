@@ -1,5 +1,5 @@
 # FejerProject
 
-Source
+## Source
 
-The main Lean formalization is contained in FejerProject/Fejer.lean.
+The main Lean formalization is contained in [`FejerProject/Fejer.lean`](./FejerProject/Fejer.lean).
