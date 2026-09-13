@@ -1,12 +1,19 @@
+/-
+Copyright (c) 2026 Nicholas Cimino. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Nicholas Cimino
+-/
+
 import Mathlib.Analysis.Fourier.AddCircle
-import Mathlib.Tactic
+import Mathlib.Tactic.Abel
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.FunProp
+import Mathlib.Tactic.GCongr
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Positivity
+import Mathlib.Tactic.Ring
 import Mathlib.MeasureTheory.Measure.Haar.Unique
-
--- set_option linter.style.whitespace false
--- set_option linter.style.emptyLine false
-
-open scoped BigOperators
-open MeasureTheory
 
 /-!
 # Fejér's theorem on `AddCircle`
@@ -45,6 +52,9 @@ Several algebraic and pointwise kernel lemmas are proved without the positivity
 assumption on `T`; positivity is retained where the compact-circle, Fourier
 coefficient, Haar-measure, or sup-norm infrastructure requires it.
 -/
+
+open scoped BigOperators
+open MeasureTheory
 
 namespace AddCircle
 
@@ -2119,4 +2129,3 @@ theorem tendstoUniformly_fejerMean
       rw [Complex.dist_eq]
     _ < ε := hN n hn x
 end AddCircle
-#lint
