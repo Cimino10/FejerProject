@@ -1207,7 +1207,7 @@ lemma continuous_fejerKernel
   unfold fejerKernel
   fun_prop
 
-lemma integrable_fejerKernel_mul_translate
+private lemma integrable_fejerKernel_mul_translate
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1248,7 +1248,7 @@ lemma integrable_fejerKernel_mul_translate
   rw [← MeasureTheory.integrableOn_univ]
   exact hloc.integrableOn_isCompact isCompact_univ
 
-lemma integrable_fejerKernel_mul_const
+private lemma integrable_fejerKernel_mul_const
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1334,7 +1334,7 @@ lemma fejerMean_sub_eq_integral
       filter_upwards with y
       ring
 
-lemma exists_neighborhood_uniform_diff_lt
+private lemma exists_neighborhood_uniform_diff_lt
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (ε : ℝ)
@@ -1403,7 +1403,7 @@ lemma norm_sub_translate_le_two_norm
     _ = 2 * ‖f‖ := by
       ring
 
-lemma norm_fejerKernel_mul_diff_le
+private lemma norm_fejerKernel_mul_diff_le
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1435,7 +1435,7 @@ lemma norm_fejerKernel_mul_diff_le
       (T := T) f x y
   nlinarith
 
-lemma norm_fejerKernel_mul_diff_le_of_diff_le
+private lemma norm_fejerKernel_mul_diff_le_of_diff_le
     {T : ℝ}
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1468,7 +1468,7 @@ lemma norm_fejerKernel_mul_diff_le_of_diff_le
     mul_le_mul_of_nonneg_left hdiff hkernel_nonneg
   simpa [mul_comm] using hmul
 
-lemma norm_fejerKernel_mul_diff_le_on_neighborhood
+private lemma norm_fejerKernel_mul_diff_le_on_neighborhood
     {T : ℝ}
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1488,7 +1488,7 @@ lemma norm_fejerKernel_mul_diff_le_on_neighborhood
     (T := T) f n x y ε
   exact le_of_lt (hU x y hy)
 
-lemma integrable_fejerKernel_mul_diff
+private lemma integrable_fejerKernel_mul_diff
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1534,7 +1534,7 @@ lemma integrable_fejerKernel_mul_diff
   rw [← MeasureTheory.integrableOn_univ]
   exact hloc.integrableOn_isCompact isCompact_univ
 
-lemma fejerMean_sub_eq_integral_add_compl
+private lemma fejerMean_sub_eq_integral_add_compl
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1615,7 +1615,7 @@ lemma integral_norm_fejerKernel
   simp_rw [norm_fejerKernel_eq_re (T := T) n]
   exact integral_fejerKernel_re (T := T) n
 
-lemma norm_integral_fejerKernel_mul_diff_on_neighborhood_le
+private lemma norm_integral_fejerKernel_mul_diff_on_neighborhood_le
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1740,7 +1740,7 @@ lemma norm_integral_fejerKernel_mul_diff_on_neighborhood_le
     _ = ε := by
       ring
 
-lemma norm_fejerKernel_mul_diff_le_of_re_le
+private lemma norm_fejerKernel_mul_diff_le_of_re_le
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1762,7 +1762,7 @@ lemma norm_fejerKernel_mul_diff_le_of_re_le
     le_trans h
       (mul_le_mul_of_nonneg_left hkernel hcoef)
 
-lemma norm_fejerKernel_mul_diff_le_outside_neighborhood
+private lemma norm_fejerKernel_mul_diff_le_outside_neighborhood
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (U : Set (AddCircle T))
@@ -1787,7 +1787,7 @@ lemma norm_fejerKernel_mul_diff_le_outside_neighborhood
     (T := T) f n x y δ
   exact le_of_lt (hN n hn y hy)
 
-lemma norm_integral_fejerKernel_mul_diff_outside_neighborhood_le
+private lemma norm_integral_fejerKernel_mul_diff_outside_neighborhood_le
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (U : Set (AddCircle T))
