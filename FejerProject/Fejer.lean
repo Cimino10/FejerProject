@@ -539,14 +539,14 @@ lemma integral_fourier
   have h := congrFun (fourierCoeff_fourier (T := T) m) 0
   simpa [fourierCoeff, Pi.single_apply, eq_comm] using h
 
-lemma integral_fourier_zero
+private lemma integral_fourier_zero
     {T : ℝ} [Fact (0 < T)] :
     (∫ x : AddCircle T,
         fourier (0 : ℤ) x ∂AddCircle.haarAddCircle) = 1 := by
   rw [integral_fourier]
   simp
 
-lemma integral_fourier_ne_zero
+private lemma integral_fourier_ne_zero
     {T : ℝ} [Fact (0 < T)]
     (m : ℤ) (hm : m ≠ 0) :
     (∫ x : AddCircle T,
@@ -1386,7 +1386,7 @@ lemma fejerKernel_tendsto_zero_uniformly_outside_neighborhood
   apply hN n hn x
   simpa using hx
 
-lemma norm_sub_translate_le_two_norm
+private lemma norm_sub_translate_le_two_norm
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (x y : AddCircle T) :
