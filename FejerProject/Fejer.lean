@@ -568,7 +568,7 @@ lemma integrable_fourier
   rw [← MeasureTheory.integrableOn_univ]
   exact hloc.integrableOn_isCompact isCompact_univ
 
-lemma integrable_weighted_fourier
+private lemma integrable_weighted_fourier
     {T : ℝ} [Fact (0 < T)]
     (n : ℕ) (m : ℤ) :
     MeasureTheory.Integrable
@@ -752,14 +752,14 @@ lemma fejerKernel_re_le
             ‖fourier (1 : ℤ) x - 1‖ ^ 2) := by
       field_simp
 
-lemma continuous_norm_fourier_one_sub_one
+private lemma continuous_norm_fourier_one_sub_one
     {T : ℝ} :
     Continuous
       (fun x : AddCircle T =>
         ‖fourier (1 : ℤ) x - 1‖) := by
   fun_prop
 
-lemma exists_pos_lower_bound_norm_fourier_one_sub_one
+private lemma exists_pos_lower_bound_norm_fourier_one_sub_one
     {T : ℝ} [Fact (0 < T)]
     (K : Set (AddCircle T))
     (hK : IsCompact K)
@@ -798,7 +798,7 @@ lemma exists_pos_lower_bound_norm_fourier_one_sub_one
     exfalso
     exact hKne ⟨x, hxK⟩
 
-lemma fejerKernel_re_le_on_compact
+private lemma fejerKernel_re_le_on_compact
     {T : ℝ} [Fact (0 < T)]
     (K : Set (AddCircle T))
     (hK : IsCompact K)
