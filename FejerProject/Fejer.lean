@@ -455,7 +455,7 @@ private lemma fejerKernel_eq_inv_mul_weighted_sum
   ring
 
 omit [Fact (0 < T)] in
-lemma fejerKernel_eq_prefix_mul_star
+private lemma fejerKernel_eq_prefix_mul_star
     (n : ℕ) (x : AddCircle T) :
     fejerKernel (T := T) n x =
       (((n + 1 : ℕ) : ℂ)⁻¹) *
@@ -615,7 +615,7 @@ Using the geometric-sum formula, we bound the Fejér kernel uniformly on compact
 sets that avoid the origin. This yields uniform decay to zero away from zero.
 -/
 
-lemma fourier_nat_eq_pow
+private lemma fourier_nat_eq_pow
     (k : ℕ) (x : AddCircle T) :
     fourier (k : ℤ) x =
       (fourier (1 : ℤ) x) ^ k := by
@@ -628,7 +628,7 @@ lemma fourier_nat_eq_pow
       rw [ih]
       rw [pow_succ]
 
-lemma fourierPrefix_eq_geom_sum
+private lemma fourierPrefix_eq_geom_sum
     (n : ℕ) (x : AddCircle T) :
     fourierPrefix (T := T) n x =
       ∑ k ∈ Finset.range (n + 1),
@@ -638,7 +638,7 @@ lemma fourierPrefix_eq_geom_sum
   intro k hk
   rw [fourier_nat_eq_pow]
 
-lemma fourierPrefix_mul_sub_one
+private lemma fourierPrefix_mul_sub_one
     (n : ℕ) (x : AddCircle T) :
     fourierPrefix (T := T) n x *
         (fourier (1 : ℤ) x - 1) =
@@ -654,7 +654,7 @@ lemma norm_fourier
   rw [fourier_apply]
   exact Circle.norm_coe ((m • x).toCircle)
 
-lemma norm_fourier_sub_one_le_two
+private lemma norm_fourier_sub_one_le_two
     {T : ℝ}
     (m : ℤ) (x : AddCircle T) :
     ‖fourier m x - 1‖ ≤ 2 := by
@@ -667,7 +667,7 @@ lemma norm_fourier_sub_one_le_two
       rw [norm_fourier]
       norm_num
 
-lemma norm_fourierPrefix_mul_norm_sub_one_le_two
+private lemma norm_fourierPrefix_mul_norm_sub_one_le_two
     {T : ℝ}
     (n : ℕ) (x : AddCircle T) :
     ‖fourierPrefix (T := T) n x‖ *
@@ -680,7 +680,7 @@ lemma norm_fourierPrefix_mul_norm_sub_one_le_two
   exact norm_fourier_sub_one_le_two
     ((n + 1 : ℕ) : ℤ) x
 
-lemma norm_fourierPrefix_le
+private lemma norm_fourierPrefix_le
     {T : ℝ}
     (n : ℕ) (x : AddCircle T)
     (hx : fourier (1 : ℤ) x ≠ 1) :
@@ -695,7 +695,7 @@ lemma norm_fourierPrefix_le
       (T := T) n x
   exact (le_div_iff₀ hpos).2 h
 
-lemma normSq_fourierPrefix_le
+private lemma normSq_fourierPrefix_le
     {T : ℝ}
     (n : ℕ) (x : AddCircle T)
     (hx : fourier (1 : ℤ) x ≠ 1) :
