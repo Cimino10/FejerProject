@@ -210,7 +210,7 @@ noncomputable def fourierPrefix
     fourier (k : ℤ) x
 
 omit [Fact (0 < T)] in
-lemma star_fourierPrefix
+private lemma star_fourierPrefix
     (n : ℕ) (x : AddCircle T) :
     starRingEnd ℂ (fourierPrefix (T := T) n x) =
       ∑ k ∈ Finset.range (n + 1),
@@ -222,7 +222,7 @@ lemma star_fourierPrefix
   rw [fourier_neg]
 
 omit [Fact (0 < T)] in
-lemma fourierPrefix_mul_star
+private lemma fourierPrefix_mul_star
     (n : ℕ) (x : AddCircle T) :
     fourierPrefix (T := T) n x *
         starRingEnd ℂ (fourierPrefix (T := T) n x) =
@@ -240,12 +240,12 @@ lemma fourierPrefix_mul_star
   ring_nf
 
 /-- The pairs of indices in `0, ..., n` whose integer difference is `m`. -/
-noncomputable def differencePairs
+private noncomputable def differencePairs
     (n : ℕ) (m : ℤ) : Finset (ℕ × ℕ) :=
   ((Finset.range (n + 1)).product (Finset.range (n + 1))).filter
     (fun p => (p.1 : ℤ) - (p.2 : ℤ) = m)
 
-lemma card_differencePairs_of_nonneg
+private lemma card_differencePairs_of_nonneg
     (n r : ℕ) :
     (differencePairs n (r : ℤ)).card =
       n + 1 - r := by
@@ -284,7 +284,7 @@ lemma card_differencePairs_of_nonneg
     simp
     omega
 
-lemma card_differencePairs_of_neg
+private lemma card_differencePairs_of_neg
     (n r : ℕ) :
     (differencePairs n (-(r : ℤ))).card =
       n + 1 - r := by
@@ -323,7 +323,7 @@ lemma card_differencePairs_of_neg
     simp
     omega
 
-lemma card_differencePairs
+private lemma card_differencePairs
     (n : ℕ) (m : ℤ) :
     (differencePairs n m).card =
       n + 1 - m.natAbs := by
@@ -345,7 +345,7 @@ lemma card_differencePairs
       _ = n + 1 - m.natAbs :=
         card_differencePairs_of_neg n m.natAbs
 
-lemma sub_mem_fourierIndices
+private lemma sub_mem_fourierIndices
     (n j k : ℕ)
     (hj : j < n + 1)
     (hk : k < n + 1) :
@@ -354,7 +354,7 @@ lemma sub_mem_fourierIndices
   omega
 
 omit [Fact (0 < T)] in
-lemma sum_by_difference
+private lemma sum_by_difference
     (n : ℕ) (x : AddCircle T) :
     ∑ m ∈ fourierIndices n,
         ∑ _p ∈ differencePairs n m,
@@ -376,7 +376,7 @@ lemma sum_by_difference
   · omega
 
 omit [Fact (0 < T)] in
-lemma sum_differencePairs
+private lemma sum_differencePairs
     (n : ℕ) (m : ℤ) (x : AddCircle T) :
     ∑ _p ∈ differencePairs n m, fourier m x =
       ((n + 1 - m.natAbs : ℕ) : ℂ) * fourier m x := by
@@ -385,7 +385,7 @@ lemma sum_differencePairs
   rw [card_differencePairs]
 
 omit [Fact (0 < T)] in
-lemma double_sum_eq_weighted_sum
+private lemma double_sum_eq_weighted_sum
     (n : ℕ) (x : AddCircle T) :
     ∑ p ∈
         (Finset.range (n + 1)).product (Finset.range (n + 1)),
@@ -398,7 +398,7 @@ lemma double_sum_eq_weighted_sum
   rw [sum_differencePairs]
 
 omit [Fact (0 < T)] in
-lemma product_sum_eq_nested_sum
+private lemma product_sum_eq_nested_sum
     (n : ℕ) (x : AddCircle T) :
     ∑ p ∈
         (Finset.range (n + 1)).product (Finset.range (n + 1)),
@@ -414,7 +414,7 @@ lemma product_sum_eq_nested_sum
         (fourier ((p.1 : ℤ) - (p.2 : ℤ)) x : ℂ))
 
 omit [Fact (0 < T)] in
-lemma fourierPrefix_mul_star_eq_weighted_sum
+private lemma fourierPrefix_mul_star_eq_weighted_sum
     (n : ℕ) (x : AddCircle T) :
     fourierPrefix (T := T) n x *
         starRingEnd ℂ (fourierPrefix (T := T) n x) =
@@ -440,7 +440,7 @@ lemma fourierPrefix_mul_star_eq_weighted_sum
       exact double_sum_eq_weighted_sum (T := T) n x
 
 omit [Fact (0 < T)] in
-lemma fejerKernel_eq_inv_mul_weighted_sum
+private lemma fejerKernel_eq_inv_mul_weighted_sum
     (n : ℕ) (x : AddCircle T) :
     fejerKernel (T := T) n x =
       (((n + 1 : ℕ) : ℂ)⁻¹) *
