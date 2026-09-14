@@ -70,10 +70,12 @@ Cesàro averages that define the Fejér means.
 noncomputable def fourierIndices (n : ℕ) : Finset ℤ :=
 Finset.Icc (-(n : ℤ)) n
 
+/-- An integer lies in `fourierIndices n` exactly when it lies between `-n` and `n`. -/
 lemma mem_fourierIndices {n : ℕ} {k : ℤ} :
     k ∈ fourierIndices n ↔ -(n : ℤ) ≤ k ∧ k ≤ n := by
   simp [fourierIndices]
 
+/-- An integer lies in `fourierIndices n` exactly when its natural absolute value is at most `n`. -/
 lemma mem_fourierIndices_iff_natAbs_le
     (n : ℕ) (m : ℤ) :
     m ∈ fourierIndices n ↔ m.natAbs ≤ n := by
@@ -102,6 +104,8 @@ private theorem fourierPartialSum_fourier_of_not_mem
   funext x
   simp [fourierPartialSum, fourierCoeff_fourier, Pi.single_apply, hm]
 
+/-- The `n`th symmetric Fourier partial sum of a Fourier mode is that mode when its
+frequency lies in `fourierIndices n`, and zero otherwise. -/
 theorem fourierPartialSum_fourier
     (n : ℕ) (m : ℤ) :
     fourierPartialSum (T := T) ⇑(fourier m) n =
@@ -162,6 +166,8 @@ private lemma sum_indicator
   rw [nsmul_eq_mul]
   rw [card_filter_natAbs_le]
 
+/-- The Fejér mean of a Fourier mode is the mode multiplied by the corresponding
+triangular Fejér weight. -/
 theorem fejerMean_fourier_eq_weighted
     (n : ℕ) (m : ℤ) :
     fejerMean (T := T) ⇑(fourier m) n =
@@ -465,6 +471,7 @@ private lemma fejerKernel_eq_prefix_mul_star
   rw [fourierPrefix_mul_star_eq_weighted_sum]
 
 omit [Fact (0 < T)] in
+/-- The Fejér kernel is `1 / (n + 1)` times the squared norm of the one-sided Fourier prefix. -/
 lemma fejerKernel_eq_normSq
     (n : ℕ) (x : AddCircle T) :
     fejerKernel (T := T) n x =
@@ -474,6 +481,8 @@ lemma fejerKernel_eq_normSq
   rw [Complex.mul_conj]
 
 omit [Fact (0 < T)] in
+/-- The real part of the Fejér kernel is `1 / (n + 1)` times the squared norm of the
+one-sided Fourier prefix. -/
 lemma fejerKernel_re
     (n : ℕ) (x : AddCircle T) :
     (fejerKernel (T := T) n x).re =
@@ -495,6 +504,7 @@ lemma fejerKernel_re
   ring
 
 omit [Fact (0 < T)] in
+/-- The Fejér kernel is real-valued. -/
 lemma fejerKernel_im
     (n : ℕ) (x : AddCircle T) :
     (fejerKernel (T := T) n x).im = 0 := by
@@ -530,6 +540,8 @@ We compute the Haar integral of the Fourier modes and deduce that every Fejér
 kernel has total mass one.
 -/
 
+/-- The normalized Haar integral of a Fourier mode is one at frequency zero and zero at
+every nonzero frequency. -/
 lemma integral_fourier
     {T : ℝ} [Fact (0 < T)]
     (m : ℤ) :
@@ -554,6 +566,7 @@ private lemma integral_fourier_ne_zero
   rw [integral_fourier]
   simp [hm]
 
+/-- Every Fourier mode on `AddCircle T` is integrable with respect to normalized Haar measure. -/
 lemma integrable_fourier
     {T : ℝ} [Fact (0 < T)]
     (m : ℤ) :
@@ -647,6 +660,7 @@ private lemma fourierPrefix_mul_sub_one
   rw [fourier_nat_eq_pow]
   exact geom_sum_mul (fourier (1 : ℤ) x) (n + 1)
 
+/-- Every Fourier mode on `AddCircle T` has pointwise norm one. -/
 lemma norm_fourier
     {T : ℝ}
     (m : ℤ) (x : AddCircle T) :
@@ -719,6 +733,8 @@ private lemma normSq_fourierPrefix_le
     _ = 4 / ‖fourier (1 : ℤ) x - 1‖ ^ 2 := by
       ring
 
+/-- Away from the origin, the real part of the Fejér kernel is bounded by the standard
+geometric-series estimate. -/
 lemma fejerKernel_re_le
     {T : ℝ}
     (n : ℕ) (x : AddCircle T)
@@ -918,6 +934,7 @@ We relate translation of Fourier modes to Haar integration and derive the
 representation of a Fejér mean as convolution with the Fejér kernel.
 -/
 
+/-- A Fourier mode sends addition on `AddCircle T` to multiplication in `ℂ`. -/
 lemma fourier_apply_add
     {T : ℝ}
     (m : ℤ)
@@ -926,6 +943,8 @@ lemma fourier_apply_add
       fourier m x * fourier m y := by
   simp [fourier_apply, AddCircle.toCircle_add]
 
+/-- A Fourier mode sends subtraction on `AddCircle T` to multiplication by the
+opposite-frequency mode. -/
 lemma fourier_apply_sub
     {T : ℝ}
     (m : ℤ)
@@ -951,6 +970,8 @@ private lemma integral_neg_haarAddCircle
       g
       AddCircle.haarAddCircle
 
+/-- Convolution of a Fourier mode with a translate of `f` extracts the corresponding
+Fourier coefficient of `f`. -/
 lemma integral_fourier_mul_translate
     {T : ℝ} [Fact (0 < T)]
     (f : AddCircle T → ℂ)
@@ -1115,6 +1136,7 @@ private lemma fourierPartialSum_eq_sum_indicator
       · exact hm
   rw [hfilter]
 
+/-- A Fejér mean is the finite Fourier sum with the usual triangular Fejér weights. -/
 lemma fejerMean_eq_weighted_fourier_sum
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
@@ -1198,6 +1220,7 @@ The near part is controlled by uniform continuity, while the far part is
 controlled by concentration of the kernel.
 -/
 
+/-- Each Fejér kernel is continuous on `AddCircle T`. -/
 lemma continuous_fejerKernel
     {T : ℝ}
     (n : ℕ) :
@@ -1361,6 +1384,7 @@ private lemma exists_neighborhood_uniform_diff_lt
       hδ hdist
     simpa [Complex.dist_eq] using hf
 
+/-- The Fejér kernels converge uniformly to zero outside any open neighborhood of the origin. -/
 lemma fejerKernel_tendsto_zero_uniformly_outside_neighborhood
     {T : ℝ} [Fact (0 < T)]
     (U : Set (AddCircle T))
@@ -1558,6 +1582,7 @@ private lemma fejerMean_sub_eq_integral_add_compl
       (integrable_fejerKernel_mul_diff
         (T := T) f n x)
 
+/-- Each Fejér kernel is integrable with respect to normalized Haar measure. -/
 lemma integrable_fejerKernel
     {T : ℝ} [Fact (0 < T)]
     (n : ℕ) :
@@ -1574,6 +1599,7 @@ lemma integrable_fejerKernel
   rw [← MeasureTheory.integrableOn_univ]
   exact hloc.integrableOn_isCompact isCompact_univ
 
+/-- The normalized Haar integral of the real part of the Fejér kernel is one. -/
 lemma integral_fejerKernel_re
     {T : ℝ} [Fact (0 < T)]
     (n : ℕ) :
@@ -1586,6 +1612,7 @@ lemma integral_fejerKernel_re
   rw [integral_fejerKernel (T := T) n] at h
   simpa using h
 
+/-- Since the Fejér kernel is real and nonnegative, its norm equals its real part. -/
 lemma norm_fejerKernel_eq_re
     {T : ℝ}
     (n : ℕ)
@@ -1606,6 +1633,7 @@ lemma norm_fejerKernel_eq_re
   rw [Complex.norm_real]
   exact Real.norm_of_nonneg hnonneg
 
+/-- The normalized Haar integral of the norm of the Fejér kernel is one. -/
 lemma integral_norm_fejerKernel
     {T : ℝ} [Fact (0 < T)]
     (n : ℕ) :
@@ -2026,6 +2054,7 @@ lemma fejerMean_uniform_error_lt
     _ < ε := by
       linarith
 
+/-- The `n`th Fejér mean of a continuous function is continuous. -/
 lemma continuous_fejerMean
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
@@ -2057,6 +2086,7 @@ noncomputable def fejerMeanContinuous
       fejerMean (T := T) f n x,
     continuous_fejerMean (T := T) f n⟩
 
+/-- Evaluating the bundled continuous Fejér mean agrees with `fejerMean`. -/
 @[simp]
 lemma fejerMeanContinuous_apply
     {T : ℝ} [Fact (0 < T)]
@@ -2067,6 +2097,7 @@ lemma fejerMeanContinuous_apply
       fejerMean (T := T) f n x := by
   rfl
 
+/-- The bundled Fejér means eventually lie within any positive sup-norm distance of `f`. -/
 lemma norm_fejerMeanContinuous_sub_lt
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
