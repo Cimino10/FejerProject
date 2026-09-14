@@ -939,7 +939,7 @@ lemma fourier_apply_sub
   rw [fourier_apply]
   simp
 
-lemma integral_neg_haarAddCircle
+private lemma integral_neg_haarAddCircle
     {T : ℝ} [Fact (0 < T)]
     (g : AddCircle T → ℂ) :
     (∫ y : AddCircle T,
@@ -1009,7 +1009,7 @@ lemma integral_fourier_mul_translate
       fourier m x * fourierCoeff f m := by
       simp [fourierCoeff, smul_eq_mul]
 
-lemma integrable_weighted_fourier_mul_translate
+private lemma integrable_weighted_fourier_mul_translate
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1042,7 +1042,7 @@ lemma integrable_weighted_fourier_mul_translate
   rw [← MeasureTheory.integrableOn_univ]
   exact hloc.integrableOn_isCompact isCompact_univ
 
-lemma integral_fejerKernel_mul_translate_eq_sum
+private lemma integral_fejerKernel_mul_translate_eq_sum
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1067,7 +1067,7 @@ lemma integral_fejerKernel_mul_translate_eq_sum
       integrable_weighted_fourier_mul_translate
         (T := T) f n m x
 
-lemma integral_fejerKernel_mul_translate_eq_weighted_fourier
+private lemma integral_fejerKernel_mul_translate_eq_weighted_fourier
     {T : ℝ} [Fact (0 < T)]
     (f : C(AddCircle T, ℂ))
     (n : ℕ)
@@ -1086,7 +1086,7 @@ lemma integral_fejerKernel_mul_translate_eq_weighted_fourier
   intro m hm
   ring
 
-lemma fourierPartialSum_eq_sum_indicator
+private lemma fourierPartialSum_eq_sum_indicator
     {T : ℝ} [Fact (0 < T)]
     (f : AddCircle T → ℂ)
     (n j : ℕ)
